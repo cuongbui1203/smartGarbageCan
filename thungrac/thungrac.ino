@@ -52,7 +52,10 @@ void setup() {
   pinMode(tiemcan, INPUT_PULLUP);
   pinMode(ht1, INPUT_PULLUP);
   pinMode(ht2, INPUT_PULLUP);
-
+  pinMode(emtyled, OUTPUT);
+  pinMode(processLed, OUTPUT);
+  digitalWrite(emtyled,1);
+  digitalWrite(processLed,0);
   servo.attach(servoPin);
 
   serial2.begin(9600);
@@ -89,6 +92,8 @@ void loop() {
 
     caculateDistance();
     run = !run && distance <= 20;
+    digitalWrite(emtyled,!run);
+    digitalWrite(processLed,run);
     controlEp();
     old = millis();
   }
